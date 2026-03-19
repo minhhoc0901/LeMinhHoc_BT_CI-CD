@@ -1,7 +1,6 @@
 services:
   app:
-    build:
-    image: minhhoc0901/leminhhoc-app:latest.
+    image: minhhoc0901/leminhhoc-app:latest
     container_name: springboot-app
     ports:
       - "8080:8080"
