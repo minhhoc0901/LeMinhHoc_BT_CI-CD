@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+    image: minhhoc0901/leminhhoc-app:latest.
+    container_name: springboot-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo-db
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://root:123456@mongo-db:27017/books?authSource=admin
+      - SPRING_DATA_MONGODB_DATABASE=books
+    networks:
+      - app-network
+
+  mongo-db:
+    image: mongo:7.0
+    container_name: mongo-db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: books
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+
+
+networks:
+  app-network:

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - Lê Minh Học</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: #0d1117;
+            color: #e6edf3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00b4d8, #0077b6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 28px;
+            box-shadow: 0 0 40px rgba(0, 180, 216, 0.4);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 40px rgba(0, 180, 216, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 60px rgba(0, 180, 216, 0.7);
+            }
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00b4d8, #48cae4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .hero .subtitle {
+            font-size: 1rem;
+            color: #8b949e;
+            line-height: 1.8;
+        }
+
+        /* ── CARDS ── */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 860px;
+            margin-bottom: 48px;
+        }
+
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 14px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #00b4d8;
+            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.15);
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .card .label {
+            font-size: 0.78rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .card .value {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #e6edf3;
+        }
+
+        /* ── TECH STACK ── */
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 48px;
+            max-width: 860px;
+        }
+
+        .badge {
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid;
+        }
+
+        .badge.java {
+            background: rgba(248, 152, 32, .1);
+            border-color: rgba(248, 152, 32, .4);
+            color: #f89820;
+        }
+
+        .badge.spring {
+            background: rgba(109, 179, 63, .1);
+            border-color: rgba(109, 179, 63, .4);
+            color: #6db33f;
+        }
+
+        .badge.thyme {
+            background: rgba(0, 180, 216, .1);
+            border-color: rgba(0, 180, 216, .4);
+            color: #00b4d8;
+        }
+
+        .badge.maven {
+            background: rgba(193, 57, 43, .1);
+            border-color: rgba(193, 57, 43, .4);
+            color: #c1392b;
+        }
+
+        .badge.docker {
+            background: rgba(13, 183, 237, .1);
+            border-color: rgba(13, 183, 237, .4);
+            color: #0db7ed;
+        }
+
+        /* ── STATUS ── */
+        .status-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-size: 0.9rem;
+            color: #3fb950;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            background: #3fb950;
+            border-radius: 50%;
+            animation: blink 1.4s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.2;
+            }
+        }
+
+        footer {
+            margin-top: 60px;
+            font-size: 0.8rem;
+            color: #484f58;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="avatar">👨‍💻</div>
+        <h1>Lê Minh Học</h1>
+        <p class="subtitle">
+            MSSV: <strong style="color:#e6edf3">2280601079</strong> &nbsp;|&nbsp;
+            Lớp: <strong style="color:#e6edf3">22DTHG4</strong>
+        </p>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="cards">
+        <div class="card">
+            <div class="icon">🎓</div>
+            <div class="label">Họ và tên</div>
+            <div class="value">Lê Minh Học</div>
+        </div>
+        <div class="card">
+            <div class="icon">🪪</div>
+            <div class="label">Mã số sinh viên</div>
+            <div class="value">2280601079</div>
+        </div>
+        <div class="card">
+            <div class="icon">🏫</div>
+            <div class="label">Lớp</div>
+            <div class="value">22DTHG4</div>
+        </div>
+        <div class="card">
+            <div class="icon">📅</div>
+            <div class="label">Năm học</div>
+            <div class="value">2025 – 2026</div>
+        </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <p class="section-title">Công nghệ sử dụng</p>
+    <div class="badges">
+        <span class="badge java">☕ Java 25</span>
+        <span class="badge spring">🍃 Spring Boot 4</span>
+        <span class="badge thyme">🌿 Thymeleaf</span>
+        <span class="badge maven">📦 Maven</span>
+        <span class="badge docker">🐳 Docker</span>
+    </div>
+
+    <!-- Status -->
+    <div class="status-bar">
+        <div class="dot"></div>
+        Server đang chạy · Spring Boot · Port 8080
+    </div>
+
+    <footer>© 2026 Lê Minh Học · 2280601079 · 22DTHG4</footer>
+
+</body>
+
+</html>
