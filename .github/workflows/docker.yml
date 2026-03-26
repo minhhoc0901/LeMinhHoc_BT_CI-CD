@@ -43,8 +43,10 @@ jobs:
         run: |
           REPO="minhhoc0901/leminhhoc-app"
           CONTAINER_PORT=8080
-          RESPONSE=$(curl -sS -w "\n%{http_code}" -X POST "${{ secrets.DEPLOY_URL }}?repo=$REPO&tag=latest&slot=1&container_port=$CONTAINER_PORT&strict_container_port=0")
-          BODY=$(echo "$RESPONSE" | sed "$d")
+          # Thêm retry để xử lý lỗi 502 tạm thời nếu server deploy bận
+          RESPONSE=$(curl -sS --retry 3 --retry-delay 5 --retry-all-errors -w "\n%{http_code}" -X POST "${{ secrets.DEPLOY_URL }}?repo=$REPO&tag=latest&slot=1&container_port=$CONTAINER_PORT&strict_container_port=0")
+          # Sửa lỗi sed "$d" thành sed '$d' để xử lý chuỗi đúng cách trong bash
+          BODY=$(echo "$RESPONSE" | sed '$d')
           CODE=$(echo "$RESPONSE" | tail -n1)
           echo "Webhook HTTP: $CODE"
           if [ "$CODE" -lt 200 ] || [ "$CODE" -ge 300 ]; then
