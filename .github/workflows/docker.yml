@@ -38,6 +38,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
       - name: Triển khai lên DevOps Classroom
         run: |
           REPO="minhhoc0901/leminhhoc-app"
